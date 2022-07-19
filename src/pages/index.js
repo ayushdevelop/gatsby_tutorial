@@ -4,8 +4,10 @@ import Layout from "../components/layout";
 // markup
 const IndexPage = () => {
   return (
-    <Layout>
-      <h3>I am building my first website.</h3>
+    <Layout pageTitle="Home Page">
+      <p>
+        I am building my first website with <strong>Gatsby</strong>.
+      </p>
     </Layout>
   );
 };
