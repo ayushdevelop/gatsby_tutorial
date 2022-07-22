@@ -18,28 +18,6 @@ const Layout = ({ pageTitle, children }) => {
         }
       }
     }
-    query BlogPosts {
-      blogPosts {
-        data {
-          attributes {
-            title
-            cover {
-              data {
-                attributes {
-                  url
-                }
-              }
-            }
-            Content {
-              ... on ComponentBlogRichText {
-                id
-                Rich_text
-              }
-            }
-          }
-        }
-      }
-    }
   `);
   return (
     <div className={container}>
@@ -56,7 +34,7 @@ const Layout = ({ pageTitle, children }) => {
           </li>
           <li className={navLinkItem}>
             <Link className={navLinkText} to="/about">
-              about
+              About
             </Link>
           </li>
           <li className={navLinkItem}>
