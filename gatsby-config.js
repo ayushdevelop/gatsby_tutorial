@@ -1,3 +1,29 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
+const strapiConfig = {
+  apiURL: process.env.STRAPI_API_URL,
+  accessToken: process.env.STRAPI_TOKEN,
+  collectionTypes: [
+    {
+      singularName: "page",
+      queryParams: {
+        publicationState:
+          process.env.GATSBY_IS_PREVIEW === "true" ? "preview" : "live",
+        populate: {
+          category: { populate: "*" },
+          cover: "*",
+          blocks: {
+            populate: "*",
+          },
+        },
+      },
+    },
+  ],
+  singleTypes: [],
+};
+
 module.exports = {
   siteMetadata: {
     title: `first gatsby site`,
@@ -14,26 +40,8 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-strapi",
-      options: {
-        apiURL: process.env.STRAPI_API_URL || "http://localhost:1337",
-        accessToken: process.env.STRAPI_TOKEN,
-        collectionTypes: [
-          {
-            singularName: "article",
-            queryParams: {
-              publicationState:
-                process.env.GATSBY_IS_PREVIEW === "true" ? "preview" : "live",
-              populate: {
-                cover: "*",
-                blocks: {
-                  populate: "*",
-                },
-              },
-            },
-          },
-        ],
-      },
+      resolve: `gatsby-source-strapi`,
+      options: strapiConfig,
     },
   ],
 };
